@@ -5,100 +5,34 @@
         }
     </style>
     <div id="portfolio">
-            <div class="container-fluid p-0">
-                <div class="row no-gutters">
-                    <div class="col-lg-4 col-sm-6">
-                        <!--
-                        <a class="portfolio-box" href="assets/img/portfolio/fullsize/1.jpg">
-                            <img class="img-fluid" src="assets/img/portfolio/thumbnails/1.jpg" alt="" />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div each={ comedian in comedians } class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box logo-design">
+                        <div class="portfolio-box-container portfolio-video" data-portfolio-big={ comedian[2] }>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{ comedian[2] }?rel=0&amp;controls=0&amp;showinfo=0" allowfullscreen></iframe>
                             </div>
-                        </a>
-                        -->
-
-                        <div class="portfolio-box logo-design">
-                            <div class="portfolio-box-container portfolio-video" data-portfolio-big="https://www.youtube.com/watch?v=cfOa1a8hYP8">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/cfOa1a8hYP8?rel=0&amp;controls=0&amp;showinfo=0" allowfullscreen></iframe>
-                                </div>
-                                <div class="portfolio-box-text">
-                                    <h3>Tempor Logo</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                                </div>
+                            <div class="portfolio-box-text">
+                                <h3>{ comedian[0] }</h3>
+                                <p>{ comedian[1] }</p>
                             </div>
                         </div>
-
-
-
-
-
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-
-                        <div class="portfolio-box logo-design">
-                            <div class="portfolio-box-container portfolio-video" data-portfolio-big="https://www.youtube.com/watch?v=cfOa1a8hYP8">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/yQt2QZ4fyvY?rel=0&amp;controls=0&amp;showinfo=0" allowfullscreen></iframe>
-                                </div>
-                                <div class="portfolio-box-text">
-                                    <h3>Tempor Logo</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/portfolio/fullsize/3.jpg">
-                            <img class="img-fluid" src="assets/img/portfolio/thumbnails/3.jpg" alt="" />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/portfolio/fullsize/4.jpg">
-                            <img class="img-fluid" src="assets/img/portfolio/thumbnails/4.jpg" alt="" />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/portfolio/fullsize/5.jpg">
-                            <img class="img-fluid" src="assets/img/portfolio/thumbnails/5.jpg" alt="" />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="assets/img/portfolio/fullsize/6.jpg">
-                            <img class="img-fluid" src="assets/img/portfolio/thumbnails/6.jpg" alt="" />
-                            <div class="portfolio-box-caption p-3">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Project Name</div>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        let tag = this
-        const MHX = window.MHX
+    let tag = this
 
-        MHX.Services.getPortFolioData().then(( data ) => {
-            console.log(data)
+    const MHX = window.MHX
+    tag.comedians = []
+
+    MHX.Services.getPortFolioData().then(( data ) => {
+        tag.update({
+            comedians: data
         })
-
-        console.log("AAA")
+    })
         
 </section-portfolio>
