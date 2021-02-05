@@ -29,10 +29,9 @@
     const MHX = window.MHX
     tag.comedians = []
 
-    MHX.Services.getPortFolioData().then(( data ) => {
+    MHX.Services.getPortFolioData().then( data => {
         tag.update({
             comedians: data
         })
     })
-        
 </section-portfolio>

@@ -39,16 +39,14 @@
 
 
                     return new Promise( (cb, errorCb) => {
-                        console.log("umm whqta now")
 
 	                   if( !window.MHX._DATA || forceRefresh ) {
-	                       console.log("heyye", window.MHX._APP_SETTINGS)
-
-	                       if( !window.MHX._DATA ) window.MHX._DATA = {}
 
 	                           $.when.apply($, window.MHX._APP_SETTINGS.apis.gAppSheets.map( url => $.ajax(url)))
 	                               .done(function() {
 	                                   var results = [];
+
+	                                    if( !window.MHX._DATA ) window.MHX._DATA = {}
 
 	                                   // there will be one argument passed to this callback for each ajax call
 	                                   // each argument is of this form [data, statusText, jqXHR]
@@ -58,15 +56,17 @@
 
 	                                       // we'll ignore the results for now and fill up our own DATA
 	                                       switch( data.range.split("!")[0] ) {
-	                                           case "APP":
-	                                                       console.log("we got config")
-	                                                       window.MHX._DATA.appConfig = data.values
-	                                                   break
+	                                            case "APP":
+	                                                        window.MHX._DATA.appConfig = data.values
+	                                                        break
 
-	                                           case "PORTFOLIO":
-	                                                       console.log("we got portfolio")
-	                                                       window.MHX._DATA.portfolio = data.values
-	                                                   break
+	                                            case "PORTFOLIO":
+	                                                        window.MHX._DATA.portfolio = data.values
+	                                                        break
+
+                                                case "HOME":
+                                                            window.MHX._DATA.home = data.values
+                                                            break
 	                                       }
 	                                   }
 
@@ -76,9 +76,10 @@
 	                               });
 	                   } else if ( window.MHX._DATA) {
                             // we got DATA
-                            cb()
+                            if( cb ) cb()
                        } else {
                             // something is very wrong :(
+                            console.log("ERR: Super bad!")
                             errorCb()
                        }
 
@@ -94,6 +95,16 @@
                     // TODO handle errors
                     return new Promise( (cb, errorCb) => {
                         window.MHX.Services.getAppData().then(() => cb(window.MHX._DATA.portfolio))
+                    })
+                },
+
+                /**
+                 *
+                 *
+                 */
+                getHomeData: ( cb, errorCb ) => {
+                    return new Promise( (cb, errorCb) => {
+                        window.MHX.Services.getAppData().then(() => cb(window.MHX._DATA.home))
                     })
                 }
             },
